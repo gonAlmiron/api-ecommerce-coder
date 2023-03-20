@@ -1,0 +1,24 @@
+components:
+  parameters:
+    schema:
+      BodyNewProduct:
+        type: object
+        required:
+          - name
+          - description
+          - price
+        properties:
+          name:
+            type: string
+            description: Nombre del producto
+          description:
+            type: string
+            description: Descripcion del producto
+          price:
+            type: integer
+            description: Precio del producto
+        example:
+          name: Mouse Katar PRO
+          description: Mouse ultraliviano Gamer para todas las plataformas
+          price: 9950
+          
