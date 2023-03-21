@@ -89,10 +89,8 @@ const socketIO = io(myHTTPServer, {
   }
 })
 
-
 socketIO.on('connection', (socket) => {
-  //console.log('user connected')
-  //console.log(socket.id)
+
 
   socket.on('message', (message, username) => {
       console.log(message)
@@ -107,29 +105,6 @@ socketIO.on('connection', (socket) => {
     socket.disconnect();
   });
 })
-
-// conexion de websocket y envio de eventos
-
-// let users = []
-
-// socketIO.on('connection', (socket) => {
-
-//   console.log(`⚡: ${socket.id} user just connected!`);
-
-//   //Listens and logs the message to the console
-//   socket.on('message', (data) => {
-//     socketIO.emit('messageResponse',data)
-//     console.log(data)
-//   });
-
-//     socket.on('newUser', (data) => {
-//       users.push(data);
-//       console.log(` Usuarios: ${users}`);
-//       socketIO.emit('newUserResponse', users);
-//     });
-
-//   socket.on('typing', (data) => 
-//   socket.broadcast.emit('typingResponse', data));
 
 
 // MIDDLEWARE DE ERRORES

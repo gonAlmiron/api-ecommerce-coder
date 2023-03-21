@@ -1,6 +1,6 @@
-import { transporter } from "../services/notifications";
-import { templateHtml } from '../services/template.js';
-import { twilioClient } from "../services/notifications.js";
+import { transporter } from "../services/notifications/notifications";
+import { templateHtml } from '../services/notifications/template.js';
+import { twilioClient } from "../services/notifications/notifications.js";
 
 
 export const gmailController = async (req, res) => {

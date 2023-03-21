@@ -1,5 +1,5 @@
 import { getDao} from "../daos/chat.factory";
-import { asDto } from "../DTO/clients.dto";
+import { asDto } from "../DTO/chat.dto";
 
 export default class ChatRepository {
     constructor() {

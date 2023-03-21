@@ -2,10 +2,8 @@ import {Router} from 'express';
 import AuthRouter from './users.router'
 import NotificationRouter from './notifications.router'
 import ProductsRouter from './products.router'
-import ClientsRouter from './clients.router'
 import ChatRouter from './chat.router'
-import IngresosRouter from './ingresos.router'
-
+import CategoryRouter from './category.router'
 
 const router = Router();
 
@@ -21,10 +19,9 @@ router.use('/notifications', NotificationRouter)
 
 router.use('/products', ProductsRouter)
 
-router.use('/clients', ClientsRouter)
-
 router.use('/chat', ChatRouter)
 
-router.use('/ingresos', IngresosRouter)
+router.use('/category', CategoryRouter)
+
 
 export default router;

@@ -1,6 +1,6 @@
 import logger from '../../logs/logger';
 import DaoMongoDB from './dao-MongoDB/mongodb' 
-import { IngresoSchema } from "./dao-MongoDB/schemas/ingreso.js";
+import { CategorySchema } from "./dao-MongoDB/schemas/category.js";
 
 
 let dao;
@@ -10,11 +10,11 @@ let selectedDao = 'mongo'
 
 switch (selectedDao) {
     case 'mongo':
-        dao = new DaoMongoDB('ingresos', IngresoSchema);
+        dao = new DaoMongoDB('category', CategorySchema);
         dao.initMongoDB()
         break;
     default:
-        dao = new DaoMongoDB('ingresos', IngresoSchema);
+        dao = new DaoMongoDB('category', CategorySchema);
         break;
 }
 

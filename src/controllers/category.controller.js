@@ -1,12 +1,12 @@
-import { saveProduct, getAllProducts, getProduct, deleteProduct, updateProduct } from '../services/product.services'
+import { saveCategory, getAllCategorys, getCategory, deleteCategory, updateCategory } from '../services/category.services'
 
 
 export const saveController = async (req, res) => {
     
     try {
         const { body } = req;
-        const product = await saveProduct(body);
-        res.send("PRODUCTO CREADO: " + product);
+        const client = await saveCategory(body);
+        res.send("CATEGORIA CREADA: " + client);
     } catch (err) {
         res.status(501).send(err.message)
     }
@@ -14,8 +14,8 @@ export const saveController = async (req, res) => {
 
 export const getAllController = async (req, res) => {
     try {
-        const products = await getAllProducts();
-        res.json(products);
+        const clients = await getAllCategorys();
+        res.json(clients);
     } catch (err) {
         res.status(501).send(err.message)
     }
@@ -24,8 +24,8 @@ export const getAllController = async (req, res) => {
 export const getByIdController = async (req, res) => {
     try {
         const {id} = req.params
-        const product = await getProduct(id);
-        res.json(product)
+        const client = await getCategory(id);
+        res.json(client)
     } catch (err) {
        res.status(501).send(err.message)
     }
@@ -34,8 +34,8 @@ export const getByIdController = async (req, res) => {
 export const deleteController = async (req, res) => {
     try {
         const {id} = req.params
-        const productDeleted = await deleteProduct(id)
-        res.send("PRODUCTO ELIMINADO: " + productDeleted )
+        const clientDeleted = await deleteCategory(id)
+        res.send("CATEGORIA ELIMINADA: " + clientDeleted )
     } catch(err) {
         res.status(501).send(err.message)
     }
@@ -45,16 +45,16 @@ export const updateController = async (req, res) => {
     try {
         const {id} = req.params 
         const {body} = req
-        const productToUpdate = await getProduct(id);
+        const clientToUpdate = await getCategory(id);
 
-        if(!productToUpdate){
+        if(!clientToUpdate){
             res.status(404).json({ message: 'Invalid id' })
           } else {
-            const productUpdated = await updateProduct(
+            const clientUpdated = await updateCategory(
                         id, 
                         body
                     )
-                    res.status(200).send("PRODUCTO EDITADO: " + productUpdated);
+                    res.status(200).send("CATEGORIA EDITADA: " + clientUpdated);
           }
 
     } catch (err) {

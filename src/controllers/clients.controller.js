@@ -61,3 +61,4 @@ export const updateController = async (req, res) => {
         res.status(501).send(err.message)
     }
 }
+

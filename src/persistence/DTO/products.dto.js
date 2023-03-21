@@ -1,9 +1,10 @@
 export default class ProductsDTO {
-    constructor({name, price, _id, description}) {
+    constructor({name, price, _id, description, categoryId}) {
         this.name = name
         this.price = price
         this.id = _id
         this.description = description
+        this.categoryId = categoryId
     }
 }
 

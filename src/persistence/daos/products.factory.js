@@ -39,6 +39,7 @@ export const updateById = async (id, prod) => {
     
 }
 
+
 // EXPORTAMOS EL DAO PARA PODER USARLO EN EL REPOSITORY
 
 export const getDao = () => {
