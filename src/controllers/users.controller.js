@@ -1,5 +1,6 @@
 import passport from 'passport';
 import logger from '../logs/logger.js';
+import { transporter } from '../services/notifications/notifications.js';
 import { passportOptions, getAllUsers } from '../services/users.services.js';
 
 export const signUpController = (req, res, next) => {
@@ -14,7 +15,14 @@ export const signUpController = (req, res, next) => {
   
     
       logger.info(`Se registró un usuario: ${user.username} \n\n. Ruta /SIGNUP. Metogo POST`)
-  
+     // ENVIANDO EMAIL AL USUARIO AL REGISTRARSE
+      transporter.sendMail({
+        from: process.env.EMAIL,
+        to: user.username,
+        subject: 'Gracias por Registrarte en E-commerce Hardware',
+        html: '<div> <h1>Gracias por registrarte!</h1> <p> Ya podes hacer la compra de tus productos en la web </p> </div>'
+      })
+
       res.json({ 
         msg: 'signup OK',
         user: user });
