@@ -2,7 +2,6 @@ import { saveCategory, getAllCategorys, getCategory, deleteCategory, updateCateg
 
 
 export const saveController = async (req, res) => {
-    
     try {
         const { body } = req;
         const client = await saveCategory(body);

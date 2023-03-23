@@ -4,7 +4,8 @@ import { transporter } from '../services/notifications/notifications.js';
 import { passportOptions, getAllUsers } from '../services/users.services.js';
 
 export const signUpController = (req, res, next) => {
-    try {
+  
+  try {
       passport.authenticate('signup', passportOptions, (err, user, info) => {
       console.log('Info SIGNUP');
       console.log(err, user, info);
@@ -13,21 +14,21 @@ export const signUpController = (req, res, next) => {
       }
       if (!user) return res.status(401).json(info);
   
-    
-      logger.info(`Se registró un usuario: ${user.username} \n\n. Ruta /SIGNUP. Metogo POST`)
-     // ENVIANDO EMAIL AL USUARIO AL REGISTRARSE
-      transporter.sendMail({
-        from: process.env.EMAIL,
-        to: user.username,
-        subject: 'Gracias por Registrarte en E-commerce Hardware',
-        html: '<div> <h1>Gracias por registrarte!</h1> <p> Ya podes hacer la compra de tus productos en la web </p> </div>'
-      })
+      
+        logger.info(`Se registró un usuario: ${user.username} \n\n. Ruta /SIGNUP. Metogo POST`)
+// ENVIANDO EMAIL AL USUARIO AL REGISTRARSE
+        transporter.sendMail({
+          from: process.env.EMAIL,
+          to: user.username,
+          subject: 'Gracias por Registrarte en E-commerce Hardware',
+          html: '<div> <h1>Gracias por registrarte!</h1> <p> Ya podes hacer la compra de tus productos en la web </p> </div>'
+        })
 
       res.json({ 
         msg: 'signup OK',
         user: user });
 
-    })(req, res, next);
+      })(req, res, next);
 
   } catch (error) {
     logger.error(error.message)
@@ -36,9 +37,7 @@ export const signUpController = (req, res, next) => {
   }
 
 export const loginController = (req, res) => {
-  
   try {
-    
     logger.info(`Se logeó un usuario. Ruta /LOGIN. Metogo POST`)
     res.status(200).json( {
       msg: `Login OK!!`,
@@ -46,7 +45,6 @@ export const loginController = (req, res) => {
     })
   } catch (error) {
     res.status(501).send(error.message)
-
   }
     }
 

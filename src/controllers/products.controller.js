@@ -2,7 +2,6 @@ import { saveProduct, getAllProducts, getProduct, deleteProduct, updateProduct }
 
 
 export const saveController = async (req, res) => {
-    
     try {
         const { body } = req;
         const product = await saveProduct(body);

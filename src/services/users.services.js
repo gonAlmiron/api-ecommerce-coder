@@ -5,7 +5,7 @@ import logger from '../logs/logger';
 import UserAPI from '../api'
 import UsersRepository from '../persistence/repository/users.repository';
 
-
+// CONFIGURACION DE PASSPORT:
 const strategyOptions = {
   usernameField: 'username',
   passwordField: 'password',
@@ -15,6 +15,7 @@ const strategyOptions = {
 export const passportOptions = { 
   badRequestMessage: 'Falta username / password'
  };
+
 
 const login = async (req, username, password, done) => {
   try {
@@ -28,7 +29,6 @@ const login = async (req, username, password, done) => {
     logger.info(err.stack)
   }
 };
-
 
 const signup = async (req, username, password, done) => {
 
@@ -53,9 +53,10 @@ export const getAllUsers = async () => {
 }
 
 
-
 export const loginFunc = new LocalStrategy(strategyOptions, login);
 export const signUpFunc = new LocalStrategy(strategyOptions, signup);
+
+
 
 passport.serializeUser((user, done) => {
   logger.info('Se Ejecuta el serializeUser');

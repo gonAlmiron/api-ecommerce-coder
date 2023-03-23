@@ -4,7 +4,6 @@ import { saveMessageController, getMessagesController } from '../controllers/cha
 const router = Router()
 
 router.post('/save', saveMessageController)
-
 router.get('/messages', getMessagesController)
 
 export default router

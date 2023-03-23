@@ -1,7 +1,7 @@
 import { UserModel } from "../persistence/daos/dao-MongoDB/schemas/user";
 
 
-  const findByID = (id) => {
+const findByID = (id) => {
     if (id) return UserModel.findById(id);
   
     return UserModel.find();
