@@ -19,11 +19,14 @@ export const passportOptions = {
 
 const login = async (req, username, password, done) => {
   try {
-    const user = await UserAPI.find(username, password)
-    if (!user)
+    const user = await UserAPI.find(username)
+    if (!user) {
       return done(null, false, { mensaje: 'Usuario no encontrado' });
+    } else {
+      const match = await user.matchPassword(password)
+      match ? done(null, user) : done(null, false)
+    }
     logger.info("ENCONTRE UN USUARIO", user)
-    return done(null, user);
   } catch (err) {
     logger.info(err);
     logger.info(err.stack)
@@ -36,7 +39,8 @@ const signup = async (req, username, password, done) => {
   try {
     const {username, password} = req.body
     const newUser = await UserAPI.create({ username, password });
-
+    newUser.password = await newUser.encryptPassword(password);
+    await newUser.save();
     logger.info(newUser)
     return done(null, newUser);
 

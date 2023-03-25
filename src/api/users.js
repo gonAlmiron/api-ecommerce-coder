@@ -7,7 +7,7 @@ const findByID = (id) => {
     return UserModel.find();
   };
 
-const find = (username, password) => UserModel.findOne({ username, password });
+const find = (username) => UserModel.findOne({ username });
 
 const create = (username, password) => UserModel.create(username, password);
 
