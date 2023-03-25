@@ -7,9 +7,11 @@ const router = Router();
 
 router.post( '/login', passport.authenticate('login', passportOptions), loginController) ;
 router.post('/signup', signUpController);
-router.post('/logout', (req, res) => {
-  req.logout();
-  res.json({ message: 'GoodBye!' });
+router.post('/logout', (req, res, next) => {
+  req.logout((err) => {
+    if (err) { return next(err); }
+    res.redirect('/');
+  });
 });
 
 export default router;

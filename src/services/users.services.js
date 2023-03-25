@@ -69,7 +69,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (userId, done) => {
   logger.info('Se Ejecuta el desserializeUser');
-  user = await UserModel.findById(userId).then((user) => {
+  user = await UserAPI.findByID(userId).then((user) => {
     return done(null, user);
   })
 });
