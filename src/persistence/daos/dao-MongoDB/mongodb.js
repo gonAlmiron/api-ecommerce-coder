@@ -9,7 +9,10 @@ mongoose.set('strictQuery', false);
 export default class DaoMongoDB {
     constructor(collection, schema){
         this.collection = mongoose.model(collection, schema);
-        this.initDB = mongoose.connect(process.env.MONGO_ATLAS_URL);
+        this.initDB = mongoose.connect(process.env.MONGO_ATLAS_URL, 
+            {useNewUrlParser: true,
+            useUnifiedTopology: true
+        });
     }
 
     async initMongoDB() {

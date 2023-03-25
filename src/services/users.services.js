@@ -4,6 +4,8 @@ import { UserModel } from '../persistence/daos/dao-MongoDB/schemas/user'
 import logger from '../logs/logger';
 import UserAPI from '../api'
 import UsersRepository from '../persistence/repository/users.repository';
+import { Strategy as googleStrategy } from "passport-google-oauth20";
+import { ensureLoggedIn } from "connect-ensure-login";
 
 // CONFIGURACION DE PASSPORT:
 const strategyOptions = {
