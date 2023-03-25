@@ -73,3 +73,28 @@ passport.deserializeUser(async (userId, done) => {
     return done(null, user);
   })
 });
+
+// AUTENTICACION CON GOOGLE
+
+passport.use(
+  new googleStrategy(
+    {
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_SECRET,
+      callbackURL: "/oauth2/redirect/accounts.google.com",  
+      scope: ["profile"], 
+      state: true,
+    },
+    (accessToken, refreshToken, profile, done) => {
+      return done(null, profile);
+    },
+  ),
+);
+
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+
+passport.deserializeUser((id, done) => {
+  done(null, id);
+});
