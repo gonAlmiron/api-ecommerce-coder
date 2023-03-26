@@ -17,7 +17,7 @@ import swaggerJSDoc from 'swagger-jsdoc';
 import http from 'http';
 import io from 'socket.io';
 import compression from 'compression';
-
+import { ensureLoggedIn } from "connect-ensure-login";
 
 const app = express()
 app.use(express.json())
@@ -48,7 +48,7 @@ const StoreOptions = {
   }),
   secret: 'shhhhhh',
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   cookie: {
     maxAge: ttlSeconds * 1000,
   },
@@ -61,7 +61,7 @@ app.use(cookieParser(mySecret));
 app.use(express.urlencoded({ extended: true }))
 app.use(morgan('dev'));
 app.use(cors())
-app.use('/api', mainRouter);
+app.use("/api", mainRouter);
 app.use(compression())
 
 
@@ -77,6 +77,38 @@ passport.use('login', loginFunc);
 //signUpFunc va a ser una funcion que vamos a crear y va a tener la logica de registro de nuevos usuarios
 passport.use('signup', signUpFunc);
 
+app.get('/google',
+  passport.authenticate('google', { scope: ['profile'] }));
+
+app.get('/oauth2/redirect/accounts.google.com', 
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
+
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+
+passport.deserializeUser((id, done) => {
+  done(null, id);
+});
+
+
+app.get("/", ensureLoggedIn(), (req, res) => {
+  res.send(`
+            <h1>Bienvenido ${req.user.displayName}!</h1>
+            `);
+  console.log(req.sessionID);
+  console.log(req.session);
+  console.log(req.user);
+});
+
+app.get("/logout", (req, res) => {
+  req.logout();
+  res.redirect("http://localhost:3000/login");
+});
 
 // PREPARACION WEBSOCKETS PARA CHAT
 

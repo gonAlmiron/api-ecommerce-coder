@@ -1,11 +1,10 @@
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
-import { UserModel } from '../persistence/daos/dao-MongoDB/schemas/user'
 import logger from '../logs/logger';
 import UserAPI from '../api'
 import UsersRepository from '../persistence/repository/users.repository';
 import { Strategy as googleStrategy } from "passport-google-oauth20";
-import { ensureLoggedIn } from "connect-ensure-login";
+
 
 // CONFIGURACION DE PASSPORT:
 const strategyOptions = {
@@ -64,26 +63,25 @@ export const signUpFunc = new LocalStrategy(strategyOptions, signup);
 
 
 
-passport.serializeUser((user, done) => {
-  logger.info('Se Ejecuta el serializeUser');
-  done(null, user._id);
-});
+// passport.serializeUser((user, done) => {
+//   logger.info('Se Ejecuta el serializeUser');
+//   done(null, user._id);
+// });
 
-passport.deserializeUser(async (userId, done) => {
-  logger.info('Se Ejecuta el desserializeUser');
-  user = await UserAPI.findByID(userId).then((user) => {
-    return done(null, user);
-  })
-});
+// passport.deserializeUser(async (userId, done) => {
+//   logger.info('Se Ejecuta el desserializeUser');
+//   user = await UserAPI.findByID(userId).then((user) => {
+//     return done(null, user);
+//   })
+// });
 
 // AUTENTICACION CON GOOGLE
-
 passport.use(
   new googleStrategy(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_SECRET,
-      callbackURL: "/oauth2/redirect/accounts.google.com",  
+      callbackURL: "/oauth2/redirect/accounts.google.com",   
       scope: ["profile"], 
       state: true,
     },
