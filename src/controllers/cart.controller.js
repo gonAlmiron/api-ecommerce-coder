@@ -1,11 +1,11 @@
-import { saveProduct, getAllProducts, getProduct, deleteProduct, updateProduct, getByClient } from '../services/product.services'
+import { saveCart, getAllCarts, getCart, deleteCart, updateCart, getByCart } from '../services/cart.services'
 
 
 export const saveController = async (req, res) => {
     try {
         const { body } = req;
-        const product = await saveProduct(body);
-        res.send("PRODUCTO CREADO: " + product);
+        const cart = await saveCart(body);
+        res.send("CART CREADO: " + cart);
     } catch (err) {
         res.status(501).send(err.message)
     }
@@ -13,8 +13,8 @@ export const saveController = async (req, res) => {
 
 export const getAllController = async (req, res) => {
     try {
-        const products = await getAllProducts();
-        res.json(products);
+        const carts = await getAllCarts();
+        res.json(carts);
     } catch (err) {
         res.status(501).send(err.message)
     }
@@ -23,14 +23,14 @@ export const getAllController = async (req, res) => {
 export const getByIdController = async (req, res) => {
     try {
         const {id} = req.params
-        const product = await getProduct(id);
+        const cart = await getCart(id);
 
-        if (!product)
+        if (!cart)
         return res.status(404).json({
-          msgs: 'Product not found!',
+          msgs: 'Cart not found!',
         });
 
-        res.json(product)
+        res.json(cart)
     } catch (err) {
        res.status(501).send(err.message)
     }
@@ -39,8 +39,8 @@ export const getByIdController = async (req, res) => {
 export const deleteController = async (req, res) => {
     try {
         const {id} = req.params
-        const productDeleted = await deleteProduct(id)
-        res.send("PRODUCTO ELIMINADO: " + productDeleted )
+        const cartDeleted = await deleteCart(id)
+        res.send("CART ELIMINADO: " + cartDeleted )
     } catch(err) {
         res.status(501).send(err.message)
     }
@@ -50,19 +50,30 @@ export const updateController = async (req, res) => {
     try {
         const {id} = req.params 
         const {body} = req
-        const productToUpdate = await getProduct(id);
+        const cartToUpdate = await getCart(id);
 
-        if(!productToUpdate){
+        if(!cartToUpdate){
             res.status(404).json({ message: 'Invalid id' })
           } else {
-            const productUpdated = await updateProduct(
+            const cartUpdated = await updateCart(
                         id, 
                         body
                     )
-                    res.status(200).send("PRODUCTO EDITADO: " + productUpdated);
+                    res.status(200).send("CART EDITADO: " + cartUpdated);
           }
 
     } catch (err) {
         res.status(501).send(err.message)
     }
+}
+
+export const getByCartController = async (req, res) => {
+    try {
+        const {cart} = req.params
+        const carts = await getByCart(cart)
+        res.json(carts)
+    } catch (err) {
+        res.status(501).send(err.message)
+    }
+
 }

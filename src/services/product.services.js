@@ -8,6 +8,7 @@ export const saveProduct = async (product) => {
 };
 
 export const getAllProducts = async() => {
+
     const products = await productsRepository.getAll();
     return products;
 };

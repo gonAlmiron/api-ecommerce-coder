@@ -1,6 +1,5 @@
-import logger from '../../logs/logger';
 import DaoMongoDB from './dao-MongoDB/mongodb' 
-import {UserSchema } from "./dao-MongoDB/schemas/user.js";
+import { CartSchema } from "./dao-MongoDB/schemas/cart.js";
 
 
 let dao;
@@ -10,24 +9,20 @@ let selectedDao = 'mongo'
 
 switch (selectedDao) {
     case 'mongo':
-        dao = new DaoMongoDB('user', UserSchema);
+        dao = new DaoMongoDB('cart', CartSchema);
         dao.initMongoDB()
         break;
     default:
-        dao = new DaoMongoDB('user', UserSchema);
+        dao = new DaoMongoDB('cart', CartSchema);
         break;
 }
 
-export const saveUser = async (username, password) => {
-    return await dao.save(username, password);
+export const save = async (obj) => {
+    return await dao.save(obj);
 }
 
 export const getAll = async () => {
     return await dao.getAll();
-}
-
-export const getUser = async (username) => {
-    return await dao.getOne(username)
 }
 
 export const getById = async (id) => {
@@ -46,6 +41,7 @@ export const updateById = async (id, prod) => {
 export const getByCategory = async (category) => {
     return await dao.getByCategory(category)
 }
+
 
 // EXPORTAMOS EL DAO PARA PODER USARLO EN EL REPOSITORY
 

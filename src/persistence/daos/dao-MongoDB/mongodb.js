@@ -46,7 +46,6 @@ export default class DaoMongoDB {
 
     async getOne(username, password) {
         try {
-
             const user = await this.collection.findOne({username, password})
             return user
 
@@ -81,7 +80,5 @@ export default class DaoMongoDB {
         } catch(err) {
             logger.error(err)
         }
-    }
-
- 
+    } 
 }

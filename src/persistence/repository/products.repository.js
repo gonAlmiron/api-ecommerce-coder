@@ -30,6 +30,5 @@ export default class ProductsRepository {
         const productUpdate = await this.dao.updateById(id, product)
         return productUpdate
     }
-
 }
 

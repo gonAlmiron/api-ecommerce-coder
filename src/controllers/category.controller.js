@@ -4,8 +4,8 @@ import { saveCategory, getAllCategorys, getCategory, deleteCategory, updateCateg
 export const saveController = async (req, res) => {
     try {
         const { body } = req;
-        const client = await saveCategory(body);
-        res.send("CATEGORIA CREADA: " + client);
+        const category = await saveCategory(body);
+        res.send("CATEGORIA CREADA: " + category);
     } catch (err) {
         res.status(501).send(err.message)
     }
@@ -13,8 +13,8 @@ export const saveController = async (req, res) => {
 
 export const getAllController = async (req, res) => {
     try {
-        const clients = await getAllCategorys();
-        res.json(clients);
+        const categorys = await getAllCategorys();
+        res.json(categorys);
     } catch (err) {
         res.status(501).send(err.message)
     }
@@ -23,8 +23,8 @@ export const getAllController = async (req, res) => {
 export const getByIdController = async (req, res) => {
     try {
         const {id} = req.params
-        const client = await getCategory(id);
-        res.json(client)
+        const category = await getCategory(id);
+        res.json(category)
     } catch (err) {
        res.status(501).send(err.message)
     }
@@ -33,8 +33,8 @@ export const getByIdController = async (req, res) => {
 export const deleteController = async (req, res) => {
     try {
         const {id} = req.params
-        const clientDeleted = await deleteCategory(id)
-        res.send("CATEGORIA ELIMINADA: " + clientDeleted )
+        const categoryDeleted = await deleteCategory(id)
+        res.send("CATEGORIA ELIMINADA: " + categoryDeleted )
     } catch(err) {
         res.status(501).send(err.message)
     }
@@ -44,16 +44,16 @@ export const updateController = async (req, res) => {
     try {
         const {id} = req.params 
         const {body} = req
-        const clientToUpdate = await getCategory(id);
+        const categoryToUpdate = await getCategory(id);
 
-        if(!clientToUpdate){
+        if(!categoryToUpdate){
             res.status(404).json({ message: 'Invalid id' })
           } else {
-            const clientUpdated = await updateCategory(
+            const categoryUpdated = await updateCategory(
                         id, 
                         body
                     )
-                    res.status(200).send("CATEGORIA EDITADA: " + clientUpdated);
+                    res.status(200).send("CATEGORIA EDITADA: " + categoryUpdated);
           }
 
     } catch (err) {
