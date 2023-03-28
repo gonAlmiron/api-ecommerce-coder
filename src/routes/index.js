@@ -22,7 +22,7 @@ router.use('/products', ProductsRouter)
 
 router.use('/chat', ChatRouter)
 
-router.use('/category', CategoryRouter)
+router.use('/categories', CategoryRouter)
 
 router.use('/cart', CartRouter)
 

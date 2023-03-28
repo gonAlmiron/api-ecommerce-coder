@@ -42,3 +42,145 @@ components:
       deleteById:
         type: string
         description: producto eliminado
+    Categories:
+      Category:
+        type: object
+        properties: 
+          name:
+            type: string
+            description: nombre del prod
+          description:
+            type: string
+            description: descripcion del prod
+        example:
+          name: Microprocesadores
+          description: Procesadores Intel y AMD Gen 3, 4 y 5
+      GetAllCategories:
+        type: array
+        items:
+          properties:
+            id:
+              type: string
+              example: oidfoi12hr12
+            name:
+              type: string
+              example: Memoria RAM 8GB Corsair LPX Vengeance
+            description:  
+              type: string
+              example: Memoria RAM DDR4 2666MHz
+      NotFound:
+        type: string
+        description: Error en el servidor
+      deleteById:
+        type: string
+        description: Categoria eliminada
+    Messages:
+      Message:
+        type: object
+        properties: 
+          message:
+            type: string
+            description: Mensaje del usuario
+          from:
+            type: string
+            description: Remitente del mensaje
+        example:
+          message: Hola buenos dias!
+          from: gonalmiron.dev@gmail.com
+      getAllMessages:
+        type: array
+        items:
+          properties:
+            id:
+              type: string
+              example: oidfoi12hr12
+            message:
+              type: string
+              example: Hola buenas noches!
+            from:
+              type: string
+              example: gonalmiron.dev@gmail.com
+      NotFound:
+        type: string
+        description: Error en el servidor
+      deleteById:
+        type: string
+        description: Mensaje eliminado
+    Carts:
+      Cart:
+        type: object
+        properties:
+          email:
+            type: string
+            description: Email del usuario
+          date:
+            type: string
+            description: Fecha de la compra
+          items:
+            type: integer
+            description: Cantidad de items
+          address:
+            type: string
+            description: Direccion del usuario
+        example:
+          email: gonalmiron.dev@gmail.com
+          date: 20/02/2022
+          items: 11
+          address: Alsina 630
+      getAllCarts:
+        type: array
+        items:
+          properties:
+            id:
+              type: string
+              example: oidfoi12hr12
+            email:
+              type: string
+              example: gonalmiron.dev@gmail.com
+            date:  
+              type: string
+              example: 18/12/2022
+            items:
+              type: string
+              example: 25
+            address:  
+              type: string
+              example: Alsina 630
+      NotFound:
+        type: string
+        description: Error en el servidor
+      deleteById:
+        type: string
+        description: Carrito eliminado
+    Users:
+      User:
+        type: object
+        properties:
+          username:
+            type: string
+            description: Email del usuario
+          password:
+            type: string
+            description: Contraseña del usuario
+        example:
+          username: gonalmiron.dev@gmail.com
+          password: dfghj34213eqwe
+      getAllUsers:
+        type: array
+        items:
+          properties:
+            id:
+              type: string
+              example: oidfoi12hr12
+            username:
+              type: string
+              example: gonalmiron.dev@gmail.com
+            password:  
+              type: string
+              example: dsfafgfra213ddas
+      NotFound:
+        type: string
+        description: Error en el servidor
+      deleteById:
+        type: string
+        description: Usuario eliminado 

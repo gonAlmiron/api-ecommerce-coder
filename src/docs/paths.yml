@@ -113,3 +113,213 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schema/Products/errorGetById'   
+  /api/categories:
+    post:
+      tags:
+        - Categories
+      summary: Registro de una nueva categoria
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/parameters/schema/BodyNewCategory'
+        required: true
+      responses:
+        200:
+          description: Se ha creado una nueva categoria
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Categories/Category'
+        500:
+          description: Error en el servidor
+          $ref: '#/components/schema/Categories/NotFound'
+    get:
+      tags:
+      - Categories
+      summary: Lista de Categories de la base de datos
+      responses:
+        200:
+          description: Lista de Categorias recibida con exito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Categories/getAllCategories'
+        500:
+          description: Error en el servidor
+          $ref: '#/components/schema/Categories/NotFound' 
+  /api/categories/{id}:
+    get:
+      tags:
+      - Categories
+      summary: Buscar categoria por ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: string ID
+          schema:
+            type: string
+      responses:
+        200:
+          description: Categoria encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Categories/Category'
+        404:
+          description: No se encuentra la categoria con este ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Categories/Category'
+    put:
+      tags:
+      - Categories
+      summary: Editar categoria por ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: string id required
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/parameters/schema/BodyNewCategory'
+        required: true
+      responses:
+          200:
+            description: Categoria actualizada
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schema/Categories/Category'
+          404:
+            description: No se encuentra category con id {id}
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schema/Categories/errorGetById'     
+    delete:
+
+      tags:
+      - Categories
+      summary: Eliminar categoria por id
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: string id required
+          schema:
+            type: string
+      responses:
+        200:
+          description: categoria eliminada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Categories/deleteById'
+        404:
+          description: No se encuentra category con id {id}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Categories/errorGetById'
+  /api/messages:
+    post:
+      tags:
+        - Messages
+      summary: Registro de un nuevo mensaje en la base de datos
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/parameters/schema/BodyNewMessage'
+        required: true
+      responses:
+        200:
+          description: Se registro un mensaje correctamente
+          content: 
+            application/json:
+              schema: 
+                $ref: '#/components/schema/Messages/Message'
+        500:
+          description: Error en el servidor
+          $ref: '#/components/schema/Messages/NotFound'
+    get:
+     tags:
+      - Messages
+      summary: Lista de Mensajes de la base de datos
+      responses:
+        200:
+          description: Lista de Mensajes recibida con exito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Messages/getAllMessages'
+        500:
+          description: Error en el servidor
+          $ref: '#/components/schema/Messages/NotFound'  
+  /api/messages/{id}:
+    get:
+      tags:
+      - Products
+      summary: Buscar producto por ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: string ID
+          schema:
+            type: string
+      responses:
+        200:
+          description: Producto encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Products/Product'
+        404:
+          description: No se encuentra un producto con este ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Products/errorGetById'
+    put:
+      tags:
+      - Products
+      summary: Editar producto por ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: string id required
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/parameters/schema/BodyNewProduct'
+        required: true
+      responses:
+          200:
+            description: Producto actualizada
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schema/Products/Product'
+          404:
+            description: No se encuentra prod con id {id}
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schema/Products/errorGetById'     
+    delete:
+  /api/carts:
+  /api/carts:{id}:
+  /api/users:
+  /api/users:{id}:

@@ -21,4 +21,73 @@ components:
           name: Mouse Katar PRO
           description: Mouse ultraliviano Gamer para todas las plataformas
           price: 9950
-          
+      BodyNewUser:
+        type: object
+        required:
+          - username
+          - password
+        properties:
+          username:
+            type: string
+            description: Email del usuario
+          password:
+            type: string
+            description: Password del usuario
+        example:
+          username: gonalmiron.dev@gmail.com
+          password: fko1pidj298dj12p12jpoij
+      BodyNewCategory:
+        type: object
+        required:
+          - name
+          - description
+        properties:
+          name:
+            type: string
+            description: Nombre de la gategoria
+          description:
+            type: string
+            description: Descripcion de la gategoria
+        example:
+          name: Microprocesadores
+          description: Procesadores Intel y AMD de todas las generaciones
+      BodyNewMessage:
+        type: object
+        required:
+          - message
+          - from
+        properties:
+          message:
+            type: string
+            description: Mensaje de un usuario
+          from:
+            type: string
+            description: Remitente del mensaje
+        example:
+          message: Hola buenos dias! acabo de entrar al chat
+          from: gonalmiron.dev@gmail.com 
+      BodyNewCart:
+        type: object
+        required:
+          - email
+          - date
+          - items
+          - address
+        properties:
+          email:
+            type: string
+            description: Email del usuario
+          date:
+            type: string
+            description: Fecha de compra
+          items:
+            type: integer
+            description: Cantidad de items
+          address:
+            type: string
+            description: Direccion del usuario
+        example:
+          email: gonalmiron.dev@gmail.com
+          date: 22/03/2023
+          items: 20
+          address: Corrientes 880
