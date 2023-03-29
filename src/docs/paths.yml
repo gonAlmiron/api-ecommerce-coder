@@ -113,6 +113,118 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schema/Products/errorGetById'   
+  /api/auth/login:
+    post:
+      tags:
+        - Users
+      summary: Inicio de sesión de un usuario
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/parameters/schema/BodyNewUser'
+        required: true
+      responses:
+        200:
+          description: Inicio de sesion de User OK
+          content: 
+            application/json:
+              schema: 
+                $ref: '#/components/schema/Users/User'
+        500:
+          description: Error en el servidor
+          $ref: '#/components/schema/Users/NotFound'
+  /api/auth/signup:
+    post:
+      tags:
+        - Users
+      summary: Registro de un nuevo User en la base de datos
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/parameters/schema/BodyNewUser'
+        required: true
+      responses:
+        200:
+          description: Se registro un User correctamente
+          content: 
+            application/json:
+              schema: 
+                $ref: '#/components/schema/Users/User'
+        500:
+          description: Error en el servidor
+          $ref: '#/components/schema/Users/NotFound'  
+  /api/chat/save:
+    post:
+      tags:
+        - Messages
+      summary: Registro de un nuevo mensaje en la base de datos
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/parameters/schema/BodyNewMessage'
+        required: true
+      responses:
+        200:
+          description: Se registro un mensaje correctamente
+          content: 
+            application/json:
+              schema: 
+                $ref: '#/components/schema/Messages/Message'
+        500:
+          description: Error en el servidor
+          $ref: '#/components/schema/Messages/NotFound'
+  /api/chat/messages/{id}:
+    get:
+      tags:
+      - Messages
+      summary: Buscar mensaje por ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: string ID
+          schema:
+            type: string
+      responses:
+        200:
+          description: Mensaje encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Messages/Message'
+        404:
+          description: No se encuentra un mensaje con este ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Messages/errorGetById'
+    delete:
+      tags:
+      - Messages
+      summary: Eliminar mensaje por id
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: string id required
+          schema:
+            type: string
+      responses:
+        200:
+          description: mensaje eliminado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Messages/deleteById'
+        404:
+          description: No se encuentra mensaje con id {id}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Messages/errorGetById'
   /api/categories:
     post:
       tags:
@@ -204,7 +316,6 @@ paths:
                 schema:
                   $ref: '#/components/schema/Categories/errorGetById'     
     delete:
-
       tags:
       - Categories
       summary: Eliminar categoria por id
@@ -228,46 +339,46 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schema/Categories/errorGetById'
-  /api/messages:
+  /api/carts:
     post:
       tags:
-        - Messages
-      summary: Registro de un nuevo mensaje en la base de datos
+        - Carts
+      summary: Registro de un nuevo Cart en la base de datos
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/parameters/schema/BodyNewMessage'
+              $ref: '#/components/parameters/schema/BodyNewCart'
         required: true
       responses:
         200:
-          description: Se registro un mensaje correctamente
+          description: Se registro un cart correctamente
           content: 
             application/json:
               schema: 
-                $ref: '#/components/schema/Messages/Message'
+                $ref: '#/components/schema/Carts/Cart'
         500:
           description: Error en el servidor
-          $ref: '#/components/schema/Messages/NotFound'
+          $ref: '#/components/schema/Carts/NotFound'
     get:
-     tags:
-      - Messages
-      summary: Lista de Mensajes de la base de datos
+      tags:
+      - Carts
+      summary: Lista de Carritos de la base de datos
       responses:
         200:
-          description: Lista de Mensajes recibida con exito
+          description: Lista de Carritos recibida con exito
           content:
             application/json:
               schema:
-                $ref: '#/components/schema/Messages/getAllMessages'
+                $ref: '#/components/schema/Carts/getAllCarts'
         500:
           description: Error en el servidor
-          $ref: '#/components/schema/Messages/NotFound'  
-  /api/messages/{id}:
+          $ref: '#/components/schema/Carts/NotFound' 
+  /api/carts:{id}:
     get:
       tags:
-      - Products
-      summary: Buscar producto por ID
+      - Carts
+      summary: Buscar Cart por ID
       parameters:
         - in: path
           name: id
@@ -277,21 +388,21 @@ paths:
             type: string
       responses:
         200:
-          description: Producto encontrado
+          description: Cart encontrado
           content:
             application/json:
               schema:
-                $ref: '#/components/schema/Products/Product'
+                $ref: '#/components/schema/Carts/Cart'
         404:
-          description: No se encuentra un producto con este ID
+          description: No se encuentra un Cart con este ID
           content:
             application/json:
               schema:
-                $ref: '#/components/schema/Products/errorGetById'
+                $ref: '#/components/schema/Carts/errorGetById'    
     put:
       tags:
-      - Products
-      summary: Editar producto por ID
+      - Carts
+      summary: Editar Cart por ID
       parameters:
         - in: path
           name: id
@@ -303,23 +414,41 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/parameters/schema/BodyNewProduct'
+              $ref: '#/components/parameters/schema/BodyNewCart'
         required: true
       responses:
           200:
-            description: Producto actualizada
+            description: Cart actualizado
             content:
               application/json:
                 schema:
-                  $ref: '#/components/schema/Products/Product'
+                  $ref: '#/components/schema/Carts/Cart'
           404:
-            description: No se encuentra prod con id {id}
+            description: No se encuentra Cart con id {id}
             content:
               application/json:
                 schema:
-                  $ref: '#/components/schema/Products/errorGetById'     
+                  $ref: '#/components/schema/Carts/errorGetById'
     delete:
-  /api/carts:
-  /api/carts:{id}:
-  /api/users:
-  /api/users:{id}:
+      tags:
+      - Carts
+      summary: Eliminar Cart por id
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: string id required
+          schema:
+            type: string
+      responses:
+        200:
+          description: Cart eliminado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Carts/deleteById'
+        404:
+          description: No se encuentra Cart con id {id}
+          content:
+            application/json:
+              schema:

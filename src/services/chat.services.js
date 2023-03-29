@@ -12,5 +12,8 @@ export const getAllMessages = async() => {
     return messages;
 };
 
-
+export const deleteMessage = async(id) => {
+    const messageDelete = await chatRepository.delete(id)
+    return messageDelete
+}
 

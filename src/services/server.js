@@ -77,6 +77,9 @@ passport.use('login', loginFunc);
 //signUpFunc va a ser una funcion que vamos a crear y va a tener la logica de registro de nuevos usuarios
 passport.use('signup', signUpFunc);
 
+
+// AUTENTICACION CON GOOGLE:
+
 app.get('/google',
   passport.authenticate('google', { scope: ['profile'] }));
 

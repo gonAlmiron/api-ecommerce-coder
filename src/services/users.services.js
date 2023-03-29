@@ -63,17 +63,17 @@ export const signUpFunc = new LocalStrategy(strategyOptions, signup);
 
 
 
-// passport.serializeUser((user, done) => {
-//   logger.info('Se Ejecuta el serializeUser');
-//   done(null, user._id);
-// });
+passport.serializeUser((user, done) => {
+  logger.info('Se Ejecuta el serializeUser');
+  done(null, user._id);
+});
 
-// passport.deserializeUser(async (userId, done) => {
-//   logger.info('Se Ejecuta el desserializeUser');
-//   user = await UserAPI.findByID(userId).then((user) => {
-//     return done(null, user);
-//   })
-// });
+passport.deserializeUser(async (userId, done) => {
+  logger.info('Se Ejecuta el desserializeUser');
+  const user = await UserAPI.findByID(userId).then((user) => {
+    return done(null, user);
+  })
+});
 
 // AUTENTICACION CON GOOGLE
 passport.use(
@@ -91,10 +91,10 @@ passport.use(
   ),
 );
 
-passport.serializeUser((user, done) => {
-  done(null, user);
-});
+// passport.serializeUser((user, done) => {
+//   done(null, user);
+// });
 
-passport.deserializeUser((id, done) => {
-  done(null, id);
-});
+// passport.deserializeUser((id, done) => {
+//   done(null, id);
+// });

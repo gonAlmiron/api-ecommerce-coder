@@ -26,6 +26,10 @@ export const getAll = async () => {
     return await dao.getAll();
 }
 
+export const deleteById = async (id) => {
+    return await dao.deleteOne(id)
+}
+
 export const getDao = () => {
     return dao;
 }

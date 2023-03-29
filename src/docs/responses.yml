@@ -1,6 +1,6 @@
 components:
   schema:
-    Products: #este seria el tag '/products'
+    Products:
       Product:
         type: object
         properties: 
@@ -55,7 +55,7 @@ components:
         example:
           name: Microprocesadores
           description: Procesadores Intel y AMD Gen 3, 4 y 5
-      GetAllCategories:
+      getAllCategories:
         type: array
         items:
           properties:

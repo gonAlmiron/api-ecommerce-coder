@@ -1,5 +1,4 @@
 import { getDao} from "../daos/chat.factory";
-import { asDto } from "../DTO/chat.dto";
 
 export default class ChatRepository {
     constructor() {
@@ -13,5 +12,10 @@ export default class ChatRepository {
     async getAll() {  
         const messages = await this.dao.getAll();
         return messages;
+    }
+
+    async delete(id) {
+        const messageDelete = await this.dao.deleteById(id);
+        return messageDelete
     }
 }

@@ -1,4 +1,4 @@
-import { saveMessage, getAllMessages } from "../services/chat.services"
+import { saveMessage, getAllMessages, deleteMessage } from "../services/chat.services"
 
 export const saveMessageController = async (req, res) => {
     try {
@@ -23,3 +23,16 @@ export const getMessagesController = async (req, res) => {
     })
         }
     }
+
+export const deleteMessageController = async (req, res) => {
+    try {
+        const {id} = req.params
+        const messageDelete = await deleteMessage(id)
+        return res.send("Mensaje Eliminado:" + messageDelete)
+    } catch(err) {
+        return res.send({
+            message: "Error al eliminar mensaje" + err.message + err.stack
+        })
+        
+    }
+}
