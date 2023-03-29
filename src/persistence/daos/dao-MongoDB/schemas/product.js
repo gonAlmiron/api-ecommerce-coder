@@ -10,7 +10,6 @@ const productsSchema = new mongoose.Schema({
   category: {
     type: mongoose.Schema.Types.ObjectId,
     ref: categoryCollection,
-    required: true,
 }
 },
 {timestamps: true},

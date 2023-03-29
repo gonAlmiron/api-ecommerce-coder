@@ -103,13 +103,14 @@ app.get("/", ensureLoggedIn(), (req, res) => {
   res.send(`
             <h1>Bienvenido ${req.user.displayName}!</h1>
             `);
-  console.log(req.sessionID);
-  console.log(req.session);
-  console.log(req.user);
+  logger.info(req.sessionID);
+  logger.info(req.session);
+  logger.info(req.user);
 });
 
-app.get("/logout", (req, res) => {
-  req.logout();
+app.post("/logout", (req, res) => {
+  req.logout(function(err) {
+    if (err) { return next(err); }})
   res.redirect("http://localhost:3000/login");
 });
 
@@ -128,7 +129,7 @@ socketIO.on('connection', (socket) => {
 
 
   socket.on('message', (message, username) => {
-      console.log(message)
+      logger.info(message)
       //Envio al resto de clientes con broadcast.emit
       socket.broadcast.emit('message', {
           body: message,
@@ -136,7 +137,7 @@ socketIO.on('connection', (socket) => {
       })
   })
   socket.on('disconnect', () => {
-    console.log('🔥: A user disconnected');
+    logger.info('🔥: A user disconnected');
     socket.disconnect();
   });
 })

@@ -13,10 +13,10 @@ export const gmailController = async (req, res) => {
     };
     try {
         const response = await transporter.sendMail(mailOptions);
-        console.log('Email enviado!');
+        logger.info('Email enviado!');
         res.json(response);
     } catch (error) {
-        console.log(error);
+        logger.info(error);
     }
 }
 
@@ -31,13 +31,13 @@ export const wppController = async(req, res) => {
       const response = await twilioClient.messages.create(message);
       res.json(response);
     } catch (error) {
-      console.log(error);
+      logger.info(error);
     }
   }
   
   export const inboxController = async (req, res) => {
     try {
-      console.log(req.body);
+      logger.info(req.body);
       if(req.body.Body.toUpperCase().includes('HOLA')) {
         await sendMessageToClient(req.body.WaId, `Hola ${req.body.ProfileName}!, ¿Cual es tu consulta?`)
       }
@@ -45,6 +45,6 @@ export const wppController = async(req, res) => {
         await sendMessageToClient(req.body.WaId, `Chau ${req.body.ProfileName}!, ¡Hasta pronto!`)
       }
     } catch (error) {
-      console.log(error);
+      logger.info(error);
     }
   }

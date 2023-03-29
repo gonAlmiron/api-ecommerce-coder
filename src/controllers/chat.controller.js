@@ -1,11 +1,12 @@
 import { saveMessage, getAllMessages, deleteMessage } from "../services/chat.services"
+import logger from "../logs/logger";
 
 export const saveMessageController = async (req, res) => {
     try {
         const message = req.body;
         const from = req.body;
         const msg = await saveMessage(message, from)
-        console.log(msg)
+        logger.info(msg)
         res.send(msg)
     } catch (err) {
         res.send(err.stack)

@@ -62,19 +62,6 @@ export const loginFunc = new LocalStrategy(strategyOptions, login);
 export const signUpFunc = new LocalStrategy(strategyOptions, signup);
 
 
-
-passport.serializeUser((user, done) => {
-  logger.info('Se Ejecuta el serializeUser');
-  done(null, user._id);
-});
-
-passport.deserializeUser(async (userId, done) => {
-  logger.info('Se Ejecuta el desserializeUser');
-  const user = await UserAPI.findByID(userId).then((user) => {
-    return done(null, user);
-  })
-});
-
 // AUTENTICACION CON GOOGLE
 passport.use(
   new googleStrategy(
@@ -91,10 +78,3 @@ passport.use(
   ),
 );
 
-// passport.serializeUser((user, done) => {
-//   done(null, user);
-// });
-
-// passport.deserializeUser((id, done) => {
-//   done(null, id);
-// });

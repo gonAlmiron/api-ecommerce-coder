@@ -7,8 +7,8 @@ export const signUpController = (req, res, next) => {
   
   try {
       passport.authenticate('signup', passportOptions, (err, user, info) => {
-      console.log('Info SIGNUP');
-      console.log(err, user, info);
+      logger.info('Info SIGNUP');
+      logger.info(err, user, info);
       if (err) {
         return next(err);
       }
