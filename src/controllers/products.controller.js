@@ -1,4 +1,4 @@
-import { saveProduct, getAllProducts, getProduct, deleteProduct, updateProduct, getByClient } from '../services/product.services'
+import { saveProduct, getAllProducts, getProduct, deleteProduct, updateProduct } from '../services/product.services'
 
 
 export const saveController = async (req, res) => {
