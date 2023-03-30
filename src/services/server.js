@@ -114,6 +114,8 @@ app.post("/logout", (req, res) => {
   res.redirect("http://localhost:3000/login");
 });
 
+
+
 // PREPARACION WEBSOCKETS PARA CHAT
 
 const myHTTPServer = http.Server(app)
