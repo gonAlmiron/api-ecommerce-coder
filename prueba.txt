@@ -1,0 +1,7 @@
+Filtra los objetos del array que tengan el tipo "locality" usando el método filter().
+
+Para cada objeto filtrado, cuenta la cantidad de objetos en el array context que tengan el tipo "neighborhood".
+
+Encuentra el objeto con la cantidad máxima de objetos en el array context usando el método reduce().
+
+Devuelve el valor de la propiedad name del objeto encontrado en el paso anterior.
