@@ -56,13 +56,13 @@ const StoreOptions = {
 
 app.use(session(StoreOptions));
 const mySecret = 'mySecret';
-
 app.use(cookieParser(mySecret));
 app.use(express.urlencoded({ extended: true }))
 app.use(morgan('dev'));
 app.use(cors())
 app.use("/api", mainRouter);
 app.use(compression())
+
 
 
 //Indicamos que vamos a usar passport en todas nuestras rutas
